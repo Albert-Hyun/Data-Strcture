@@ -1,0 +1,50 @@
+# 노드를 통해서 스택 
+class Node:
+    def __init__(self, value=None, next=None):
+        self.value = value
+        self.next = next
+
+class StackNode:
+    # 헤드와 top 구현하고 길이 위해서 count
+    def __init__(self):
+        self.head = None
+        self.top = None
+
+    # isempty 구현하기
+    # in : X
+    # out : True / False
+
+    def isempty(self):
+        return not bool(self.head)
+
+    def peek(self):
+        return self.head.value
+
+    def push(self, item):
+        # 아예 없는 경우
+        if self.head is None:
+            self.head = Node(item)
+        # 기존에 1개 이상 있는 경우
+        # 새로운 것이 만들어지면 일단 아이템만 contain된 노드 생성
+        # 그 노드의 참조를 이전 노드인 self.head로
+        # 그 self.head를 자기 자신으로 만들고 다음 참조를 대기
+        else:
+            new_node = Node(item)
+            new_node.next = self.head
+            self.head = new_node
+
+    def pop(self):
+        # self.head의 움직임에 따라 큐/스택을 조절 가능
+        if self.head is None:
+            print("이 스택은 비었습니다.")
+        else:
+            popped = self.head.value
+            self.head = self.head.next
+            return popped
+
+    def _printList(self):
+        node = self.head
+        while node:
+            print(node.value, end=" ")
+            node = node.next
+        print()
