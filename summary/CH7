@@ -31,6 +31,7 @@ https://www.sanfoundry.com/python-program-implement-queue-data-structure-using-l
 힙을 사용함으로써 가장 큰/작은 요소를 처리하는 시간복잡도는 O(1) 이고 조회, 추가, 수정은 O(log n) 이다.
 우선순위 큐는 heapq 모듈을 사용해서 구현하는 형식 (숫자가 높을수록 우선순위도 증가)
 https://smlee729.github.io/python/data%20structure/2015/03/04/1-heap.html
+https://www.youtube.com/watch?v=GnKHVXv_rlQ&list=WL&index=2&t=0s
 
 # 연결 리스트에 대해 #
 
@@ -45,3 +46,4 @@ https://smlee729.github.io/python/data%20structure/2015/03/04/1-heap.html
 해시 테이블은 이후 해시 버킷의 배열로 구성되며, 해시 충돌을 방지하기 위해 키-값 쌍을 저장한다.
 해시 테이블의 조회, 삽입, 삭제의 시간복잡도는 O(1) 이며, 각 키가 동일해지면 O(n) 이다.
 다음의 블로그를 통해 해시 테이블의 개념과 샘플 코드를 알 수 있다.
+https://bcho.tistory.com/1072
