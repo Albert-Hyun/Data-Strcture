@@ -1,0 +1,20 @@
+Class QueueList:
+    def __init__(self):
+        self.datalist = []
+
+    def isEmpty(self):
+        return not bool(self.datalist)
+
+    def enqueue(self, value):
+        # 큐 뒤쪽에 항목을 삽입한다
+        self.datalist.append(value)
+
+    def dequeue(self):
+        # 큐 앞쪽의 항목을 반환 후 제거한다
+        return self.datalist.pop(0)
+
+    def peek(self):
+        return self.datalist[0]
+
+    def size(self):
+        return len(self.datalist)
