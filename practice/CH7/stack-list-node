@@ -1,0 +1,36 @@
+# 리스트 형식으로 Stack 구현하기
+
+class StackList:
+    def __init__(self):
+        self.items = []
+
+    # empty 여부 확인
+    def isempty(self):
+        return not bool(self.items)
+
+    # size
+    def size(self):
+        return len(self.items)
+
+    # push
+    # in : value
+    # out : x
+
+    def push(self, value):
+        self.items.append(value)
+
+    # pop
+    # 뒤의 것만 제거해서 반환
+    # condition : 비어있으면 '스택 비어있음'
+
+    def pop(self):
+        popped_item = self.items.pop()
+        if self.items is not None:
+            return popped_item
+
+    # top(peek)
+
+    def peek(self):
+        return self.items[-1]
+
+
