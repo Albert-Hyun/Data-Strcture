@@ -1,0 +1,47 @@
+# emulating stack with list
+
+class StackList:
+    def __init__(self):
+        self.items = []
+
+    # empty 여부 확인
+    def isempty(self):
+        return not bool(self.items)
+
+    # size
+    def size(self):
+        return len(self.items)
+
+    # push
+    # in : value
+    # out : x
+
+    def push(self, value):
+        self.items.append(value)
+
+    # pop
+    # 뒤의 것만 제거해서 반환
+    # condition : 비어있으면 '스택 비어있음'
+
+    def pop(self):
+        popped_item = self.items.pop()
+        if self.items is not None:
+            return popped_item
+
+    # top(peek)
+
+    def peek(self):
+        return self.items[-1]
+
+if __name__ == "__main__":
+    stack = StackList()
+    print("스택이 비었나요? {0}".format(stack.isempty()))
+    print("스택에 숫자 0~9를 추가합니다.")
+    for i in range(10):
+        stack.push(i)
+    print("스택 크기: {0}".format(stack.size()))
+    print("peek: {0}".format(stack.peek()))
+    print("pop: {0}".format(stack.pop()))
+    print("peek: {0}".format(stack.peek()))
+    print("스택이 비었나요? : {0}".format(stack.isempty()))
+    print(stack)
