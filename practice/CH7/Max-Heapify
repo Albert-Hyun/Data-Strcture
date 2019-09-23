@@ -1,0 +1,70 @@
+# 우선순위 힙 구현하기
+# 리스트로 먼저 구현하고, swap 기능 구현하기
+
+class MinHeap:
+    def __init__(self):
+        self.queue = [] # 리스트 안에는 value, 위치는 index
+
+    def swap(self, pos1, pos2):
+        self.queue[pos1], self.queue[pos2] = self.queue[pos2], self.queue[pos1]
+
+    @staticmethod
+    def parent(index): # index에 해당하는 원소의 무보 index 리턴
+        return index//2
+
+    # insert 메서드 구현하기
+    # Heap의 맨 마지막에 원소 추가하고
+    # 부모와 바교해보고 더 작으면 부모와 change, 안 그러면 stop
+    # root까지 가면 멈춘다
+
+    def insert(self, n):
+        self.queue.append(n)
+        i = len(self.queue) - 1 # 마지막 인덱스에 해당
+        while i > 1: # 여기서 root 도달까지 swap 진행하기
+            parent = self.parent(i)
+            if self.queue[i] < self.queue[parent]: # 부모와 비교해 더 작으면
+                self.swap(i, parent) # 바꾸고
+                i = parent # 이를 반복하기 위해 i를 마지막/2인 parent로 새롭게 생신
+            else:
+                break
+
+    # delete 메서드 구현하기
+    # Queue에 있는 마지막 원소로 root를 덮어쓴다
+    # 자식들과 비교해서 자신이 더 작으면 거기서 멈춘다
+    # 그렇지 않으면 자식들 중에 가장 작은 자식과 바꾸고 내려간 자리에서 2번 진행
+
+    def delete(self):
+        self.swap(0, len(self.queue)-1) # 마지막 원소와 root 바꾸기
+        self.queue.pop(len(self.queue)-1) # 마지막 원소 제거
+        self.minHeapify(0) # root에서 heapify 시작하기 (root 부터)
+
+    @staticmethod
+    def leftchild(index):
+        return index*2 + 1 
+
+    @staticmethod
+    def rightchild(index):
+        return index*2 + 2
+
+    def minHeapify(self, i): # 위의 경우 1부터 시작한다
+        left = self.leftchild(i)
+        right = self.rightchild(i)
+        smallest = i # 일단은 가장 작은 것을 자신
+        if left <= len(self.queue)-1 and self.queue[left] < self.queue[smallest]: #왼쪽 자식이 존재, 가장 작은 것보다 작으면
+            smallest = left
+        if right <= len(self.queue)-1 and self.queue[right] < self.queue[smallest]:
+            smallest = right
+        if smallest != i:
+            self.swap(i, smallest) # 다르면 바꾸고
+            self.minHeapify(smallest) # 새로운 smallest로 recursive call
+
+if __name__=="__main__":
+    import random
+    minheap = MinHeap()
+    for _ in range(10):
+        minheap.insert(random.randint(1, 50))  # 랜덤하게 10개의 원소를 입력
+    print(minheap.queue)
+
+    for _ in range(10):
+        minheap.delete()
+        print(minheap.queue)
