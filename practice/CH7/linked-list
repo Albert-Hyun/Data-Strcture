@@ -1,0 +1,99 @@
+# Linked List ADT
+# s.append(data) -> None
+# s.search_target(target, start=0) -> (data, pos)
+# s.search_pos(pos) -> data
+# s.remove(target) -> data
+# s.empty() -> bool
+# s.size() -> integer
+
+from node import Node
+
+class LinkedList:
+
+    # initializer
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.d_size = 0
+
+    # s.empty
+    def empty(self):
+        if self.d_size == 0:
+            return True
+        else:
+            return False
+
+    # s.size
+    def size(self):
+        return self.d_size
+
+    # s.append
+    # case 1) no node
+    # case 2) 1+ nods
+    def append(self, data):
+        new_node = Node(data)
+        if self.d_size == 0:
+            self.head = new_node
+            self.tail = new_node
+            self.d_size += 1
+        else:
+            self.tail.next = new_node
+            self.tail = new_node
+            self.d_size +=1
+
+    # 찾기 (index, 타겟)
+
+    def search_target(self, target, start=0): # 예상은 (data, pos)
+        if self.empty():
+            return None
+        else:
+            pos = 0
+            cur = self.head
+            if pos>=start and target == cur.data:
+                return cur.data, pos
+        while cur.next:
+            pos += 1
+            cur = cur.next
+            if pos>=start and target==cur.data:
+                return cur.data, pos
+
+        return None, None
+
+    def search_pos(self, pos):
+        if pos > self.size()-1:
+            return None
+
+        cnt = 0
+        cur = self.head
+        if cnt == pos:
+            return cur.data
+
+        while cnt < pos:
+            cur = cur.next
+            cnt += 1
+        return cur.data
+
+    def total_list(self):
+        if self.d_size == 0:
+            print("This List is Empty")
+            return ""
+        else:
+            for i in range(self.d_size):
+                print(self.search_pos(i), end = " ")
+            return ""
+
+if __name__ == "__main__":
+    s = LinkedList()
+    print(s.size())
+    print(s.empty())
+    s.append(5)
+    print(s.size())
+    s.append(4)
+    print(s.size())
+    s.append(3)
+    print(s.size())
+    print(s.empty())
+    print(s.search_target(4))
+    print(s.search_pos(1))
+    print(s.search_pos(0))
+    print(s.total_list())
