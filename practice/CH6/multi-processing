@@ -16,6 +16,7 @@ pool = multiprocessing.Pool(processes=5)
 
 # partial은 어떤 함수의 클로져 객체 반환 
 # 여기서는 func = Singlecount()
+# 예를 들어 func(a,b) = return a+b일 때, f = partial(func, a=5) 이면 f(4) = 9이다.
 
 func = partial(singleCount)
 
