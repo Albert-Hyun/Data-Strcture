@@ -1,0 +1,31 @@
+# 멀티 스레딩으로 0부터 100,000,000까지 합을 구한 것
+
+from threading import Thread
+
+# work_plus 함수는 start부터 end까지 더한 total 값을
+# 리스트인 result에 붙인 다음 아무것도 리턴하지 않는다.
+
+def work_plus(id, start, end, result):
+    total = 0
+    for i in range(start, end):
+        total += i
+    result.append(total)
+    return
+
+# 스레드 2개를 나누어서 각자 스레드로 계산하는 경우
+# 서로의 범위를 다르게 해놓고 start로 시작, join으로 끝내는 형태
+# threading 모듈에 대한 파이썬 공식 문서 : 
+# ttps://docs.python.org/3/library/threading.html?highlight=threading#module-threading
+
+if __name__ == "__main__":
+    start, end = 0, 100000000
+    result = list()
+    thrd1 = Thread(target=work_plus, args=(1, start, end//2, result))
+    thrd2 = Thread(target=work_plus, args=(2, end//2, end, result))
+
+    thrd1.start()
+    thrd2.start()
+    thrd1.join()
+    thrd2.join()
+
+    print(sum(result)) # 4999999950000000
