@@ -1,0 +1,33 @@
+from functools import partial # partial는 똑같은 기능이지만 매개변수만 다른 함수를 만든다.
+import multiprocessing
+import time
+
+def singleCount(name): 
+    for i in range(1, 10000001):
+        if (i%2500000 == 0):
+            print(name, ":", i)
+
+lists = ['1', '2', '3', '4', '5']
+
+print("## Multi Processing ##")
+start_time = time.time()
+pool = multiprocessing.Pool(processes=5)
+
+# partial은 어떤 함수의 클로져 객체 반환 
+# 여기서는 func = Singlecount()
+
+func = partial(singleCount)
+
+# 5개의 프로세서가 배정된 pool가 SingleCount(name=1), SingleCount(name=2).. 가 배정
+
+pool.map(func, lists)
+
+# 완성되면 close
+
+pool.close()
+
+# join으로 종료한다
+
+pool.join()
+
+print("Multi Time: %s\n" % (time.time()-start_time))
