@@ -1,3 +1,11 @@
+# 옵저버 패턴의 기본적 구조는 다음과 같다:
+# subscriber는 기본적으로 옵저버를 통해 subject의 변화를 관찰한다
+# subscriber가 생성되고 Observer가 이를 등록한 다음,
+# subject 객체에 Observer (subscriber 등록된 상태) 를 등록한다.
+# subject가 notify_observer를 통해 Observer 객체의 self.msg = info로 하면
+# observer 객체는 notify를 통해 등록된 subscriber의 sub.msg (원래 빈 메시지) 를 자신의 self.msg로 변경
+# subscriber는 이를 update를 통해 print 한다.
+
 class Observer:
     def __init__(self):
         self.subscriber = []
