@@ -1,0 +1,20 @@
+# 모듈 생성할 때, 가변 객체는 기본값으로 사용하면 안된다.
+# 잘못된 예에 대해서
+
+def append_wrong(number, number_list = []): # number_list는 채워질때마다 달라진다
+    number_list.append(number)
+    return number_list
+
+def append_right(number, number_list = None):
+    if number_list is None:
+        number_list = []
+    number_list.append(number)
+    return number_list
+
+print(append_wrong(5))
+print(append_wrong(7))
+print(append_wrong(2)) # [5,7,2]
+print("="*15)
+print(append_right(5)) # [5]
+print(append_right(7)) # [7]
+print(append_right(2)) # [2]
