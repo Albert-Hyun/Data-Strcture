@@ -1,0 +1,16 @@
+# 퀵 소트는 임의의 피봇값을 정해서 이보다 많고 적은 그룹값을 정한 후
+# 그 안에서 다시 피봇갑을 정해서 이를 실시한다.
+
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr # 길이가 1 이하면 정렬의 의미 x
+    pivot = arr[len(arr)//2]
+    lesser_arr, equal_arr, greater_arr = [], [], []
+    for num in arr:
+        if num < pivot:
+            lesser_arr.append(num)
+        elif num > pivot:
+            greater_arr.append(num)
+        else:
+            equal_arr(append(num))
+        return quick_sort(lesser_arr) + equal_arr + quick_sort(greater_arr)
