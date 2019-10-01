@@ -1,0 +1,32 @@
+# https://ratsgo.github.io/data%20structure&algorithm/2017/10/03/mergesort/
+# 병합 정렬은 일단 모두 나눈 다음에, 더 이상 나눌 수 없을 때에 merge 실시한다
+
+def merge_sort(list):
+    if len(list) <= 1:
+        return list
+    mid = len(list)//2
+    leftList = list[:mid]
+    rightList = list[mid:]
+    leftList = merge_sort(leftList)
+    rightList = merge_sort(rightList)
+    return merge(leftList, rightList)
+
+def merge(left, right):
+    result = []
+    while len(left) > 0 or len(right) > 0:
+        if len(left) > 0 and len(right) > 0: # 양쪽이 다 한 개 이상
+            if left[0] <= right[0]: ## 1. left와 right의 0번째 요소 비교
+                result.append(left[0])
+                left = left[1:]
+            else:
+                result.append(right[0]) ## 1.1 큰 쪽이 result에 삽입하고 줄이기
+                right = right[1:]
+        elif len(left) > 0: # 만약 len(left)만 남으면
+            result.append(left[0]) # left만 집어넣기
+            left = left[1:]
+        elif len(right) > 0: # right만 남으면
+            result.append(right[0]) # right만 집어넣기
+            right = right[1:]
+    return result
+
+print(merge_sort([14, 7, 3, 12, 9, 11, 6, 2]))
