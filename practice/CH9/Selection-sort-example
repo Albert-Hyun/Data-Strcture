@@ -1,0 +1,15 @@
+# 선택 정렬은 리스트에서 가장 작거나 큰 항목 찾아 첫번째와 위치 변경
+# 그 다음 항목을 찾아서 두 번째 항목과 위치 변경
+
+def selection_sort(l):
+    for i in range(len(l)-1):
+        l_first = l[i]
+        l_rest = l[i+1:]
+        if l_first > min(l_rest):
+            tmp_first = l_first
+            l_first = l_rest[min(l_rest)]
+            l_rest[min(l_rest)] = tmp_first
+            print(l)
+        return l
+
+print(selection_sort([9,6,7,3,5]))
