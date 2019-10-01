@@ -1,0 +1,25 @@
+def quick_sort_condensed(arr):
+    def partition(low, high):
+        pivot = arr[(low + high) // 2]
+        while low <= high:
+            while arr[low] < pivot:
+                low += 1
+            while arr[high] > pivot:
+                high -= 1
+            if low <= high:
+                arr[low], arr[high] = arr[high], arr[low]
+                low, high = low + 1, high - 1
+        return low
+
+    def sort(low, high):
+        if low >= high:
+            return "No"
+        mid = partition(low, high)
+        sort(low, mid - 1)
+        sort(mid, high)
+        return arr[:]
+
+    return sort(0, len(arr)-1)
+
+
+print(quick_sort_condensed([22,11,6,100,44,54,98,189,612,293,574,182,499]))
