@@ -1,0 +1,14 @@
+# 재귀 함수의 형식
+
+# return은 target의 위치
+def binary_search_rec(seq, target, low, high):
+    # base case
+    if low > high:
+        return None
+    mid = (low + high) // 2
+    if target == seq[mid]:
+        return mid
+    elif target > seq[mid]:
+        return binary_search_rec(seq, target, mid+1, high)
+    else:
+        return binary_search_rec(seq, target, low, mid-1)
